@@ -1,4 +1,4 @@
-import {availableOffers,offerTotal,chosenOffer,totals,normalize,safeURL,escapeHTML as e} from './model.mjs';
+import {availableOffers,offerTotal,chosenOffer,totals,normalize,safeURL,escapeHTML as e} from './model.js';
 const $=s=>document.querySelector(s), uid=()=>crypto.randomUUID(), money=n=>new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'}).format(n), date=s=>s?new Date(s+'T12:00:00').toLocaleDateString('pt-PT'):'—';
 const demo=new URLSearchParams(location.search).has('demo'), key='ninho-demo-v1';
 let state,csrf='',view='list',category='all',filter='all',query='',sort='custom',busy=false;

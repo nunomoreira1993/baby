@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {offerTotal,chosenOffer,totals,safeURL,escapeHTML,normalize} from '../public/assets/model.mjs';
+import {offerTotal,chosenOffer,totals,safeURL,escapeHTML,normalize} from '../public/assets/model.js';
 const offer=(id,price,pack=1)=>({id,price,pack,kind:'observed'});
 test('packs inteiros determinam a opção mais barata, não apenas preço unitário',()=>{
  const i={quantity:3,offers:[offer('a',10,2),offer('b',7,1)]};

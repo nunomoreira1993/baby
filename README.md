@@ -17,6 +17,8 @@ Webapp mobile em **PHP 8.2+, MySQL 8 e JavaScript sem framework**. Lista inicial
 
 Colocar a pasta completa em `public_html/baby/` e abrir `https://o-teu-dominio/baby/public/`. O `.htaccess` da raiz bloqueia a consulta das pastas internas e do ficheiro de configuração em Apache 2.4 com `mod_rewrite` e `AllowOverride` ativos. A opção preferida é criar um subdomínio cuja raiz seja `baby/public`. Não publicar a raiz inteira num servidor que ignore `.htaccess`.
 
+No cPanel, selecionar **PHP 8.2 ou superior para o próprio domínio/subdomínio**, com `pdo_mysql` ativo; a versão do terminal pode ser diferente. A API devolve um erro explícito se a versão web for demasiado antiga. Os módulos JavaScript públicos usam `.js`, para serem servidos com o tipo MIME JavaScript mesmo em alojamentos que não reconhecem `.mjs`. Se o ecrã ficar em “A preparar o vosso ninho…”, verificar na consola do navegador se há erros de carregamento dos módulos.
+
 ### Docker
 
 Copiar [.env.example](.env.example) para `.env` e alterar as três passwords. Não usar `config.local.php` com Docker (as variáveis de ambiente já configuram o acesso ao serviço `db`).
@@ -63,9 +65,12 @@ As quantidades são referências do documento, não necessidades universais. Med
 
 ```sh
 node --test tests/model.test.mjs
+node --test tests/http.test.mjs
 php tests/validation.php
 php -l public/api.php
 ```
+
+O teste HTTP inicia um servidor PHP local temporário, sem usar MySQL, e verifica o carregamento dos módulos e o diagnóstico de versão PHP. Pode selecionar o executável com `PHP_BINARY`.
 
 Os dados iniciais são gerados por `node scripts/build-data.mjs`, `node scripts/market-data.mjs` e `node scripts/package-data.mjs`. Isto altera apenas os ficheiros de instalação, não uma base de dados já instalada. O esquema mantém o documento familiar em JSON MySQL, com atualização atómica e controlo de versão.
 

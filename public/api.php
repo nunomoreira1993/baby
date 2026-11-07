@@ -1,9 +1,15 @@
 <?php
 declare(strict_types=1);
-require __DIR__.'/../app/bootstrap.php';
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 header('X-Content-Type-Options: nosniff');
+if (PHP_VERSION_ID < 80200) {
+    http_response_code(503);
+    error_log('Ninho requires PHP 8.2 or newer.');
+    echo json_encode(['error'=>'A aplicação requer PHP 8.2 ou superior. Altera a versão de PHP do domínio no alojamento.'], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+require __DIR__.'/../app/bootstrap.php';
 ini_set('session.use_strict_mode','1');
 session_name('ninho_session');
 session_set_cookie_params(['httponly'=>true,'secure'=>!empty($_SERVER['HTTPS'])&&$_SERVER['HTTPS']!=='off','samesite'=>'Strict','path'=>'/']);
