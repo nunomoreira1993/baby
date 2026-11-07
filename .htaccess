@@ -6,4 +6,5 @@ Options -Indexes
 </FilesMatch>
 RewriteEngine On
 RewriteRule ^(?:app|data|scripts|tests|\.git|\.runtime)(?:/|$) - [F,L]
-RewriteRule ^$ public/ [R=302,L]
+# Caminho URL absoluto: evita expor o caminho físico em alojamentos com alias.
+RewriteRule ^$ /public/ [R=302,L]
