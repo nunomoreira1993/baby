@@ -1,0 +1,6 @@
+.git
+.runtime
+.env
+config.local.php
+node_modules
+*.log

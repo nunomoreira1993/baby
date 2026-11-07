@@ -1,0 +1,9 @@
+# Proteção adicional caso o projeto seja colocado dentro de public_html.
+# Preferir sempre configurar a raiz do site para public/.
+Options -Indexes
+<FilesMatch "^(config\..*\.php|\.env.*|compose\.yaml|Dockerfile|.*\.docx)$">
+  Require all denied
+</FilesMatch>
+RewriteEngine On
+RewriteRule ^(?:app|data|scripts|tests|\.git|\.runtime)(?:/|$) - [F,L]
+RewriteRule ^$ public/ [R=302,L]
